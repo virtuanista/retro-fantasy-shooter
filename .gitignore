@@ -1,0 +1,21 @@
+# Dependencias y compilados
+node_modules/
+dist/
+build/
+release/
+.vite/
+*.tsbuildinfo
+# Entorno y secretos
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+# Datos locales
+tools/shots/
+tools/gallery/
+*.log
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
