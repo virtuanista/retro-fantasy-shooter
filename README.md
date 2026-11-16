@@ -1,8 +1,23 @@
+<div align="center">
+
 # Retro Fantasy Shooter
 
-Shoot'em up horizontal multidireccional de estilo retro.
-Es un juego **original**: nombre, nave, enemigos, jefes, escenarios, arte y música
-son propios (arte rasterizado por código y música chiptune generada por semillas).
+**Shoot'em up horizontal de estilo 8 bits que se juega en el navegador.**
+Arte rasterizado por código y música chiptune generada por semillas, sin ninguna dependencia: un `index.html` y a jugar.
+
+[![Jugar ahora](https://img.shields.io/badge/▶_Jugar_ahora-en_el_navegador-ff5fa2?style=for-the-badge)](https://virtuanista.github.io/retro-fantasy-shooter/)
+
+![JavaScript](https://img.shields.io/badge/JavaScript-sin_dependencias-f7df1e?logo=javascript&logoColor=black)
+![Canvas 2D](https://img.shields.io/badge/Canvas_2D-pixel_art_procedural-e34c26)
+![Web Audio](https://img.shields.io/badge/Web_Audio-chiptune-orange)
+![Pruebas](https://img.shields.io/badge/pruebas-41_comprobaciones-2ea44f)
+![Licencia MIT](https://img.shields.io/badge/licencia-MIT-blue)
+
+![Zonas del juego](docs/capturas/mosaico.png)
+
+</div>
+
+Es un juego **original**: nombre, nave, enemigos, jefes, escenarios, arte y música son propios.
 No usa recursos externos: todo se genera en el navegador.
 
 > **Inspirado en** *Fantasy Zone* (Sega, 1986) y su versión para Game Gear: comparte el estilo de juego
@@ -10,9 +25,23 @@ No usa recursos externos: todo se genera en el navegador.
 > Es un proyecto de fans sin ánimo de lucro y no está afiliado a Sega. Todo el código, el arte y la música
 > de este repositorio son originales. *Fantasy Zone* es una marca de SEGA Corporation.
 
+## Índice
+
+- [Cómo jugar](#cómo-jugar)
+- [Capturas](#capturas)
+- [Contenido](#contenido)
+- [Curiosidades técnicas](#curiosidades-técnicas)
+- [Estructura](#estructura)
+- [Pruebas](#pruebas)
+- [Licencia](#licencia)
+
 ## Cómo jugar
 
-Abre `index.html` con doble clic. No necesita servidor, conexión ni instalar nada.
+- **En el navegador:** entra en **[virtuanista.github.io/retro-fantasy-shooter](https://virtuanista.github.io/retro-fantasy-shooter/)**.
+- **Sin conexión:** descarga el repositorio y abre `index.html` con doble clic. No necesita servidor, conexión ni instalar nada.
+
+Destruye las 6 bases de cada zona para que aparezca el jefe, recoge las monedas que sueltan los enemigos
+y gástalas en los globos-tienda en motores, armas, bombas y extras. Cuidado: cada compra encarece la siguiente.
 
 | Acción | Teclado | Mando |
 |---|---|---|
@@ -40,24 +69,14 @@ el volumen, la escala y la pantalla completa. Los récords se guardan en `localS
 
 El estado está en `window.__game`.
 
-## Estructura
+## Capturas
 
-| Fichero | Módulos |
-|---|---|
-| `js/config.js` | **Todo el balance**: niveles, enemigos, jefes, precios e inflación, monedas, peligros, música |
-| `js/core.js` | Utilidades de mundo circular (wrap-around) y entrada (teclado, mando, virtual) |
-| `js/player.js` | PlayerController, PlayerCombat, PlayerHealth, WeaponSystem |
-| `js/projectiles.js` | ProjectileSystem |
-| `js/enemies.js` | EnemyController (8 familias), EnemySpawner, EnemyBase |
-| `js/bosses.js` | BossController y los 8 jefes |
-| `js/economy.js` | CurrencySystem, EconomyManager, ShopInventory, EquipmentInventory |
-| `js/stage.js` | StageManager, ShopController, HazardSystem |
-| `js/game.js` | GameManager (estados, menús, récords, depuración) |
-| `js/sprites.js`, `js/render.js` | Arte procedural, HUDController y render |
-| `js/audio.js` | Música y efectos con WebAudio |
-| `js/main.js` | Bucle de paso fijo a 60 Hz |
-
-La simulación no depende del render, así que se puede ejecutar en Node.
+| | | |
+|---|---|---|
+| ![Título](docs/capturas/titulo.png) | ![Bosque Orgánico](docs/capturas/bosque.png) | ![Mundo Ígneo](docs/capturas/ignea.png) |
+| **Título** | **Zona 1: Bosque Orgánico** | **Zona 2: Mundo Ígneo** |
+| ![Mundo Glacial](docs/capturas/glacial.png) | ![Mundo de Nubes](docs/capturas/nubes.png) | ![Cinder Wheel](docs/capturas/jefe.png) |
+| **Zona 3: Mundo Glacial** | **Zona 5: Mundo de Nubes** | **Jefe: Cinder Wheel** |
 
 ## Contenido
 
@@ -95,6 +114,33 @@ artículos se agrupan por categoría:
 | Flash Burst |
 | Auto Shot |
 | Extra Ship |
+
+## Curiosidades técnicas
+
+- **Ni una imagen ni un audio**: los sprites se rasterizan por código al arrancar y la música es un secuenciador chiptune que genera cada canción a partir de una semilla.
+- **Mundo circular**: cada zona es un bucle horizontal (*wrap-around*), así que puedes volar en ambos sentidos sin llegar nunca al final.
+- **Simulación separada del dibujo**: la lógica corre a 60 Hz con paso fijo y no depende del render, así que las pruebas juegan partidas enteras en Node, sin navegador.
+- **Un bot se pasa el juego**: en las pruebas, un bot invencible completa las 7 zonas, la fase final y el jefe definitivo en unos 25 minutos de juego simulado.
+- **Balance en un solo fichero**: niveles, enemigos, jefes, precios e inflación están en `js/config.js`.
+
+## Estructura
+
+| Fichero | Módulos |
+|---|---|
+| `js/config.js` | **Todo el balance**: niveles, enemigos, jefes, precios e inflación, monedas, peligros, música |
+| `js/core.js` | Utilidades de mundo circular (wrap-around) y entrada (teclado, mando, virtual) |
+| `js/player.js` | PlayerController, PlayerCombat, PlayerHealth, WeaponSystem |
+| `js/projectiles.js` | ProjectileSystem |
+| `js/enemies.js` | EnemyController (8 familias), EnemySpawner, EnemyBase |
+| `js/bosses.js` | BossController y los 8 jefes |
+| `js/economy.js` | CurrencySystem, EconomyManager, ShopInventory, EquipmentInventory |
+| `js/stage.js` | StageManager, ShopController, HazardSystem |
+| `js/game.js` | GameManager (estados, menús, récords, depuración) |
+| `js/sprites.js`, `js/render.js` | Arte procedural, HUDController y render |
+| `js/audio.js` | Música y efectos con WebAudio |
+| `js/main.js` | Bucle de paso fijo a 60 Hz |
+
+La simulación no depende del render, así que se puede ejecutar en Node.
 
 ## Pruebas
 
@@ -146,3 +192,14 @@ El resultado es cero excepciones en consola.
 | Fase final de repetición de jefes | Test [1]: 15 jefes derrotados |
 | Fin al perder todas las vidas | Test [2] |
 | Progresión de principio a fin | Test [1]: el dinero y la dificultad crecen por zona |
+
+## Licencia
+
+Código, arte y música originales, publicados con licencia [MIT](LICENSE).
+
+<details>
+<summary><b>In English</b></summary>
+
+*Retro Fantasy Shooter* is an 8-bit style horizontal shoot'em up for the browser, inspired by Sega's *Fantasy Zone*. All sprites are rasterized from code and the chiptune music is generated from seeds; there are no dependencies at all. [Play it in your browser](https://virtuanista.github.io/retro-fantasy-shooter/) or just open `index.html`.
+
+</details>
