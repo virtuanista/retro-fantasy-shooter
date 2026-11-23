@@ -100,7 +100,7 @@
       RFS.CurrencySystem.drop(g, e.x, e.y, e.reward);
       if (e.group) {
         e.group.killed++;
-        if (e.group.killed === e.group.size) { RFS.CurrencySystem.drop(g, e.x, e.y - 8, RFS.CONFIG.enemies.formation.groupBonus); g.popText(e.x, e.y - 14, 'BONUS!', 'large'); }
+        if (e.group.killed === e.group.size) { RFS.CurrencySystem.drop(g, e.x, e.y - 8, RFS.CONFIG.enemies.formation.groupBonus); g.popText(e.x, e.y - 14, '¡BONUS!', 'large'); }
       }
       RFS.Audio.sfx('explode');
     },
@@ -184,7 +184,7 @@
       RFS.CurrencySystem.drop(g, b.x - 10, b.y, 'large');
       RFS.CurrencySystem.drop(g, b.x + 10, b.y, 'large');
       g.shake = 10; RFS.Audio.sfx('bigexplode');
-      g.notice(g.basesLeft > 0 ? 'BASE DESTRUIDA  ' + g.basesLeft + ' RESTANTES' : '¡TODAS LAS BASES DESTRUIDAS!');
+      g.notice(g.basesLeft > 0 ? 'BASE DESTRUIDA  ' + (g.basesLeft === 1 ? 'QUEDA 1' : 'QUEDAN ' + g.basesLeft) : '¡TODAS LAS BASES DESTRUIDAS!');
       if (g.basesLeft <= 0) g.onAllBasesDestroyed();
     }
   };
