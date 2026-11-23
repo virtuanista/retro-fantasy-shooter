@@ -45,6 +45,7 @@
   const Input = RFS.Input = {
     ACTIONS,
     keys: {},            // código -> pulsado
+    taps: {},            // códigos pulsados desde el último fotograma (no se pierden toques cortos)
     bindings: JSON.parse(JSON.stringify(DEFAULT_KEYS)),
     virtual: null,       // objeto {accion: bool} para bots/pruebas
     cur: {}, prev: {},
@@ -53,13 +54,13 @@
     resetBindings() { this.bindings = JSON.parse(JSON.stringify(DEFAULT_KEYS)); },
     attach(target) {
       target.addEventListener('keydown', e => {
-        this.keys[e.code] = true; this.lastKey = e.code;
+        this.keys[e.code] = true; this.taps[e.code] = true; this.lastKey = e.code;
         if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Space', 'Tab'].includes(e.code)) e.preventDefault();
       });
       target.addEventListener('keyup', e => { this.keys[e.code] = false; });
-      target.addEventListener('blur', () => { this.keys = {}; });
+      target.addEventListener('blur', () => { this.keys = {}; this.taps = {}; });
       // ratón: clic izquierdo = Mouse0, clic derecho = Mouse2
-      target.addEventListener('mousedown', e => { this.keys['Mouse' + e.button] = true; this.lastKey = 'Mouse' + e.button; });
+      target.addEventListener('mousedown', e => { this.keys['Mouse' + e.button] = true; this.taps['Mouse' + e.button] = true; this.lastKey = 'Mouse' + e.button; });
       target.addEventListener('mouseup', e => { this.keys['Mouse' + e.button] = false; });
       target.addEventListener('contextmenu', e => e.preventDefault());
     },
@@ -72,8 +73,10 @@
     update() {
       this.prev = this.cur;
       const c = {};
-      if (this.virtual) { for (const a of ACTIONS) c[a] = !!this.virtual[a]; this.cur = c; return; }
-      for (const a of ACTIONS) c[a] = this.bindings[a].some(k => this.keys[k]);
+      if (this.virtual) { for (const a of ACTIONS) c[a] = !!this.virtual[a]; this.cur = c; this.taps = {}; return; }
+      // una tecla pulsada y soltada entre dos fotogramas cuenta como pulsada en este
+      for (const a of ACTIONS) c[a] = this.bindings[a].some(k => this.keys[k] || this.taps[k]);
+      this.taps = {};
       this.pollPad();
       const p = this.pad;
       if (p) {
