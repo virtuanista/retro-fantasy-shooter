@@ -102,6 +102,9 @@
     schedule() {
       if (!this.ctx || !this.song) return;
       const song = this.song, dt = 60 / song.tempo / 4;
+      // si el temporizador se retrasó (pestaña en segundo plano, pausa larga del
+      // hilo), se saltan los pasos perdidos en vez de tocarlos todos de golpe
+      if (this.nextTime < this.ctx.currentTime) { const miss = Math.ceil((this.ctx.currentTime - this.nextTime) / dt); this.step += miss; this.nextTime += miss * dt; }
       while (this.nextTime < this.ctx.currentTime + 0.12) {
         const s = this.step % song.steps, t = this.nextTime;
         const L = song.lead[s], B = song.bass[s], R = song.arp[s], D = song.drum[s];
