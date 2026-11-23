@@ -74,7 +74,7 @@
         { id: 'megabomb',  cat: 'bomb', name: 'MEGA BOMB',    desc: 'Bomba de gran potencia',   price: 5200, growth: 1.7, uses: 3 },
         // Objetos especiales
         { id: 'shield',  cat: 'special', name: 'SHIELD',      desc: 'Absorbe 3 impactos (40 s)', price: 2200, growth: 1.6, hits: 3, time: 40 },
-        { id: 'flash',   cat: 'special', name: 'FLASH BURST', desc: 'Ataque de área (tecla FLASH)',  price: 1800, growth: 1.5, uses: 1 },
+        { id: 'flash',   cat: 'special', name: 'FLASH BURST', desc: 'Ataque de área ({flash})',  price: 1800, growth: 1.5, uses: 1 },
         { id: 'auto',    cat: 'special', name: 'AUTO SHOT',   desc: 'Disparo automático',        price: 1200, growth: 1.8 },
         { id: 'extra',   cat: 'special', name: 'EXTRA SHIP',  desc: 'Una vida adicional',        price: 9000, growth: 1.8 }
       ]

@@ -353,7 +353,7 @@
       txt(ctx, (exitSel ? '▶ ' : '  ') + 'SALIR', C.w / 2, ey, exitSel ? '#ffd040' : '#c0c0d8', 'c');
       // descripción
       let desc = '';
-      if (!exitSel) { const it = RFS.ShopInventory.byCategory(cats[cur.c].id)[cur.r]; desc = it.desc; }
+      if (!exitSel) { const it = RFS.ShopInventory.byCategory(cats[cur.c].id)[cur.r]; desc = it.desc.replace(/\{(\w+)\}/g, (m, a) => RFS.Input.keyName(RFS.Input.bindings[a][0])); }
       txt(ctx, g.shopMsgT > 0 ? g.shopMsg : desc, C.w / 2, ey + 14, g.shopMsgT > 0 ? '#80ff80' : '#80f0ff', 'c');
       txt(ctx, 'DISPARO: COMPRAR   BOMBA/ESC: SALIR', C.w / 2, ey + 26, '#8080a0', 'c');
     },
@@ -396,12 +396,18 @@
           const ks = ['up', 'left', 'down', 'right'].map(a => I.bindings[a][i]);
           if (ks.some(c => !c)) return '';
           if (ks.every(c => /^Arrow/.test(c))) return 'FLECHAS';
-          const n = ks.map(c => I.keyName(c)); return n.every(s => s.length === 1) ? n.join('') : n.join(' ');
+          const n = ks.map(c => I.keyName(c)); return n.every(s => s.length === 1) ? n.join('') : ''; // solo grupos tipo WASD
         };
-        const move = [group(0), group(1)].filter(Boolean).join('/');
-        txt(ctx, move + ' MOVER  ' + k('fire') + ' DISPARO', cx, 176, '#c0c0d8', 'c');
-        txt(ctx, k('bomb') + ' BOMBA  ' + k('flash') + ' FLASH', cx, 187, '#c0c0d8', 'c');
-        txt(ctx, k('equip') + ' EQUIPO  ' + k('pause') + ' PAUSA  MANDO COMPATIBLE', cx, 198, '#c0c0d8', 'c');
+        const move = [group(0), group(1)].filter(Boolean).join('/') || ['up', 'left', 'down', 'right'].map(k).join('/');
+        // agrupación preferida; si alguna línea no cabe (53 caracteres), se reparte de forma voraz
+        const items = [move + ' MOVER', k('fire') + ' DISPARO', k('bomb') + ' BOMBA', k('flash') + ' FLASH', k('equip') + ' EQUIPO', k('pause') + ' PAUSA', 'MANDO COMPATIBLE'];
+        let lines = [items.slice(0, 2), items.slice(2, 4), items.slice(4)].map(l => l.join('  '));
+        if (lines.some(l => l.length > 53)) {
+          lines = [''];
+          for (const it of items) { const L = lines[lines.length - 1]; if (L && (L + '  ' + it).length > 53) lines.push(it); else lines[lines.length - 1] = L ? L + '  ' + it : it; }
+          if (lines.length > 3) lines = lines.slice(0, 3); // sin sitio: se omite lo último («MANDO COMPATIBLE»)
+        }
+        lines.forEach((l, i) => txt(ctx, l, cx, 176 + i * 11, '#c0c0d8', 'c'));
         if (!RFS.Audio.ctx && t % 60 < 40) txt(ctx, 'PULSA ' + k('fire') + ' O HAZ CLIC PARA ACTIVAR EL SONIDO', cx, 211, '#ffff80', 'c');
       } else if (g.state === 'options') {
         panel(ctx, 50, 96, 220, 120);
