@@ -404,10 +404,12 @@
         txt(ctx, k('equip') + ' EQUIPO  ' + k('pause') + ' PAUSA  MANDO COMPATIBLE', cx, 198, '#c0c0d8', 'c');
         if (!RFS.Audio.ctx && t % 60 < 40) txt(ctx, 'PULSA ' + k('fire') + ' O HAZ CLIC PARA ACTIVAR EL SONIDO', cx, 211, '#ffff80', 'c');
       } else if (g.state === 'options') {
-        panel(ctx, 50, 96, 220, 112);
+        panel(ctx, 50, 96, 220, 120);
         const s = g.settings, bar = v => '■'.repeat(Math.round(v * 10)) + '□'.repeat(10 - Math.round(v * 10));
         const labels = { music: 'MÚSICA   ' + bar(s.music), sfx: 'EFECTOS  ' + bar(s.sfx), scale: 'ESCALA   ' + (s.scale ? s.scale + 'x' : 'AUTO'), fullscreen: 'PANTALLA COMPLETA', controls: 'CONTROLES', resetkeys: 'RESTABLECER CONTROLES', back: 'VOLVER' };
         g.optionItems().forEach((k, i) => txt(ctx, (g.menu.i === i ? '▶ ' : '  ') + labels[k], 60, 104 + i * 14, g.menu.i === i ? '#ffd040' : '#ffffff'));
+        const cur = g.optionItems()[g.menu.i];
+        txt(ctx, ['music', 'sfx', 'scale'].includes(cur) ? '◀ ▶ AJUSTAR' : 'DISPARO: ACEPTAR   ESC: VOLVER', cx, 204, '#8080a0', 'c');
       } else if (g.state === 'controls') {
         panel(ctx, 40, 90, 240, 130);
         const A = RFS.Input.ACTIONS, names = { up: 'ARRIBA', down: 'ABAJO', left: 'IZQUIERDA', right: 'DERECHA', fire: 'DISPARO', bomb: 'BOMBA', flash: 'FLASH', equip: 'EQUIPO', pause: 'PAUSA', back: 'ATRÁS' };
