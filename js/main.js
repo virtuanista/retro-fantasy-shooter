@@ -18,7 +18,7 @@
     }
   });
   window.__game = game;
-  if (params.has('debug') && params.get('level')) { RFS.Audio.unlock(); game.newGame(Math.max(0, Math.min(7, (parseInt(params.get('level'), 10) || 1) - 1))); }
+  if (params.has('debug') && params.get('level')) { game.newGame(Math.max(0, Math.min(7, (parseInt(params.get('level'), 10) || 1) - 1))); }
 
   // Pantalla completa desde el menú de opciones. Dentro de un iframe sin
   // permiso (o en navegadores sin la API) se avisa en vez de lanzar errores.

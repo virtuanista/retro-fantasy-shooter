@@ -289,8 +289,8 @@
 
     // ----------------------------------------------------------- depuración
     debugKeys() {
-      const k = RFS.Input.keys, e = this._dbg || (this._dbg = {});
-      const edge = c => { const v = !!k[c], r = v && !e[c]; e[c] = v; return r; };
+      const k = RFS.Input.keys, tp = RFS.Input.lastTaps || {}, e = this._dbg || (this._dbg = {});
+      const edge = c => { const v = !!(k[c] || tp[c]), r = v && !e[c]; e[c] = v; return r; };
       if (!this.econ) return;
       if (edge('Digit1')) this.debugKillBases();
       if (edge('Digit2')) { this.money += 10000; this.notice('DEBUG +10000'); }

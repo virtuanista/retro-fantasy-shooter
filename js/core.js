@@ -76,7 +76,7 @@
       if (this.virtual) { for (const a of ACTIONS) c[a] = !!this.virtual[a]; this.cur = c; this.taps = {}; return; }
       // una tecla pulsada y soltada entre dos fotogramas cuenta como pulsada en este
       for (const a of ACTIONS) c[a] = this.bindings[a].some(k => this.keys[k] || this.taps[k]);
-      this.taps = {};
+      this.lastTaps = this.taps; this.taps = {};
       this.pollPad();
       const p = this.pad;
       if (p) {
