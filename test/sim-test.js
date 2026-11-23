@@ -131,7 +131,9 @@ console.log('\n[2] Fin de partida al perder todas las vidas');
   const f = run(g, step, 60000, g => g.state === 'gameover');
   ok(f > 0, 'Game over tras ' + f + ' frames');
   ok(g.lives === 0 && g.stats.deaths === 3, 'Vidas 0 y 3 muertes registradas');
-  ok(g.records.length === 1, 'Se guarda el récord de la partida');
+  ok(g.records.length === (g.score > 0 ? 1 : 0), 'Se guarda el récord de la partida (no si termina con 0 puntos; puntos: ' + g.score + ')');
+  const g2 = new RFS.Game({}); g2.newGame(0); g2.score = 4321; g2.gameOver();
+  ok(g2.records.length === 1 && g2.records[0].score === 4321 && g2.newRecordRank === 0, 'Una partida con puntos entra en la tabla de récords');
 }
 
 // ===================================================================== 3
