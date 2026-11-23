@@ -389,11 +389,20 @@
       textBig(ctx, 'SHOOTER', cx, 54, '#ff60a0', 3, '#2a0a3a');
       if (g.state === 'title') {
         ['EMPEZAR PARTIDA', 'OPCIONES', 'RÉCORDS'].forEach((s, i) => txt(ctx, (g.menu.i === i ? '▶ ' : '  ') + s, 110, 122 + i * 13, g.menu.i === i ? '#ffd040' : '#ffffff'));
-        txt(ctx, 'RÉCORD ' + String(g.records.length ? g.records[0].score : 0).padStart(8, '0'), cx, 166, '#80f0ff', 'c');
-        txt(ctx, 'WASD MOVER  ESPACIO DISPARO  CLIC IZQ BOMBA', cx, 186, '#c0c0d8', 'c');
-        txt(ctx, 'CLIC DER FLASH', cx, 175, '#c0c0d8', 'c');
-        txt(ctx, 'E EQUIPO  ENTER PAUSA  MANDO COMPATIBLE', cx, 197, '#c0c0d8', 'c');
-        if (!RFS.Audio.ctx && t % 60 < 40) txt(ctx, 'PULSA ESPACIO O CLIC PARA ACTIVAR EL SONIDO', cx, 210, '#ffff80', 'c');
+        txt(ctx, 'RÉCORD ' + String(g.records.length ? g.records[0].score : 0).padStart(8, '0'), cx, 163, '#80f0ff', 'c');
+        // ayuda generada a partir de los controles actuales (refleja la reasignación)
+        const I = RFS.Input, k = a => I.keyName(I.bindings[a][0]);
+        const group = i => {
+          const ks = ['up', 'left', 'down', 'right'].map(a => I.bindings[a][i]);
+          if (ks.some(c => !c)) return '';
+          if (ks.every(c => /^Arrow/.test(c))) return 'FLECHAS';
+          const n = ks.map(c => I.keyName(c)); return n.every(s => s.length === 1) ? n.join('') : n.join(' ');
+        };
+        const move = [group(0), group(1)].filter(Boolean).join('/');
+        txt(ctx, move + ' MOVER  ' + k('fire') + ' DISPARO', cx, 176, '#c0c0d8', 'c');
+        txt(ctx, k('bomb') + ' BOMBA  ' + k('flash') + ' FLASH', cx, 187, '#c0c0d8', 'c');
+        txt(ctx, k('equip') + ' EQUIPO  ' + k('pause') + ' PAUSA  MANDO COMPATIBLE', cx, 198, '#c0c0d8', 'c');
+        if (!RFS.Audio.ctx && t % 60 < 40) txt(ctx, 'PULSA ' + k('fire') + ' O HAZ CLIC PARA ACTIVAR EL SONIDO', cx, 211, '#ffff80', 'c');
       } else if (g.state === 'options') {
         panel(ctx, 50, 96, 220, 112);
         const s = g.settings, bar = v => '■'.repeat(Math.round(v * 10)) + '□'.repeat(10 - Math.round(v * 10));

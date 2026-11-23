@@ -91,6 +91,7 @@
     }
     saveRecord(won) {
       if (this.recordSaved) return; this.recordSaved = true;
+      if (!(this.score > 0)) { this.newRecordRank = -1; return; } // una partida sin puntos no entra en la tabla
       const rec = { score: this.score, stage: won ? 'FIN' : String(this.level.id), money: this.stats.coins, date: new Date().toISOString().slice(0, 10) };
       this.records.push(rec); this.records.sort((a, b) => b.score - a.score);
       this.records = this.records.slice(0, this.cfg.records.keep);
@@ -176,6 +177,7 @@
       const acts = RFS.Input.ACTIONS, c = this.ctl;
       if (c.wait) {
         const k = RFS.Input.lastKey;
+        if (!k && this.stateT > 5 && I.pressed('back')) { c.wait = false; RFS.Audio.sfx('cursor'); return; } // cancelar con el mando
         if (k && k !== c.before && this.stateT > 5) {
           if (k !== 'Escape') { RFS.Input.bindings[acts[c.i]] = [k].concat(RFS.Input.bindings[acts[c.i]].filter(x => x !== k).slice(0, 1)); this.saveSettings(); }
           c.wait = false; RFS.Audio.sfx('buy'); RFS.Input.prev = Object.assign({}, RFS.Input.cur, { fire: true, back: true });

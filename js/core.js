@@ -92,6 +92,12 @@
     },
     down(a) { return !!this.cur[a]; },
     pressed(a) { return !!this.cur[a] && !this.prev[a]; },
-    keyName(code) { if (code === 'Mouse0') return 'CLIC IZQ'; if (code === 'Mouse2') return 'CLIC DER'; if (code === 'Mouse1') return 'CLIC CEN'; return (code || '').replace(/^Key/, '').replace(/^Arrow/, '').replace(/^Digit/, ''); }
+    keyName(code) {
+      const N = { Mouse0: 'CLIC IZQ', Mouse1: 'CLIC CEN', Mouse2: 'CLIC DER', Space: 'ESPACIO', Escape: 'ESC', Backspace: 'RETROCESO', Enter: 'ENTER', NumpadEnter: 'ENTER NUM',
+        ArrowUp: 'FLECHA ARRIBA', ArrowDown: 'FLECHA ABAJO', ArrowLeft: 'FLECHA IZQ', ArrowRight: 'FLECHA DER', ShiftLeft: 'MAYÚS IZQ', ShiftRight: 'MAYÚS DER',
+        ControlLeft: 'CTRL IZQ', ControlRight: 'CTRL DER', AltLeft: 'ALT', AltRight: 'ALT GR', CapsLock: 'BLOQ MAYÚS', Tab: 'TAB',
+        Period: '.', Comma: ',', Minus: '-', Slash: '/', Quote: "'", Equal: '=' };
+      return N[code] || (code || '').replace(/^Key/, '').replace(/^Digit/, '').replace(/^Numpad/, 'NUM ');
+    }
   };
 })(typeof window !== 'undefined' ? window : globalThis);

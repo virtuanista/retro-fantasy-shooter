@@ -58,9 +58,9 @@
       ],
       items: [
         // Motores: mejoras permanentes durante la vida actual
-        { id: 'fins',    cat: 'engine', name: 'FEATHER FINS', desc: 'Velocidad +pequeña', price: 400,  growth: 2.0, speed: 1.75 },
-        { id: 'ionjet',  cat: 'engine', name: 'ION JET',      desc: 'Velocidad +media',   price: 1200, growth: 2.0, speed: 2.15 },
-        { id: 'turbo',   cat: 'engine', name: 'TURBO CORE',   desc: 'Velocidad +alta',    price: 3500, growth: 2.0, speed: 2.55 },
+        { id: 'fins',    cat: 'engine', name: 'FEATHER FINS', desc: 'Velocidad: mejora pequeña', price: 400,  growth: 2.0, speed: 1.75 },
+        { id: 'ionjet',  cat: 'engine', name: 'ION JET',      desc: 'Velocidad: mejora media', price: 1200, growth: 2.0, speed: 2.15 },
+        { id: 'turbo',   cat: 'engine', name: 'TURBO CORE',   desc: 'Velocidad: mejora alta', price: 3500, growth: 2.0, speed: 2.55 },
         { id: 'comet',   cat: 'engine', name: 'COMET DRIVE',  desc: 'Velocidad máxima',   price: 8000, growth: 2.0, speed: 3.0 },
         // Armas principales: munición o duración limitada
         { id: 'rear',    cat: 'weapon', name: 'REAR SHOT',    desc: 'Dispara también atrás', price: 700,  growth: 1.6, mode: 'ammo', amount: 320 },
@@ -74,7 +74,7 @@
         { id: 'megabomb',  cat: 'bomb', name: 'MEGA BOMB',    desc: 'Bomba de gran potencia',   price: 5200, growth: 1.7, uses: 3 },
         // Objetos especiales
         { id: 'shield',  cat: 'special', name: 'SHIELD',      desc: 'Absorbe 3 impactos (40 s)', price: 2200, growth: 1.6, hits: 3, time: 40 },
-        { id: 'flash',   cat: 'special', name: 'FLASH BURST', desc: 'Ataque de área (tecla C)',  price: 1800, growth: 1.5, uses: 1 },
+        { id: 'flash',   cat: 'special', name: 'FLASH BURST', desc: 'Ataque de área (tecla FLASH)',  price: 1800, growth: 1.5, uses: 1 },
         { id: 'auto',    cat: 'special', name: 'AUTO SHOT',   desc: 'Disparo automático',        price: 1200, growth: 1.8 },
         { id: 'extra',   cat: 'special', name: 'EXTRA SHIP',  desc: 'Una vida adicional',        price: 9000, growth: 1.8 }
       ]
