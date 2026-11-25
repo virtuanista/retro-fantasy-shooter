@@ -203,3 +203,19 @@ Código, arte y música originales, publicados con licencia [MIT](LICENSE).
 *Retro Fantasy Shooter* is an 8-bit style horizontal shoot'em up for the browser, inspired by Sega's *Fantasy Zone*. All sprites are rasterized from code and the chiptune music is generated from seeds; there are no dependencies at all. [Play it in your browser](https://virtuanista.github.io/retro-fantasy-shooter/) or just open `index.html`.
 
 </details>
+
+<p align="center">
+	Repositorio generado por <a href="https://github.com/virtuanista" target="_blank">virtu 🎣</a>
+</p>
+
+<p align="center">
+	<img src="https://open.soniditos.com/cat_footer.svg" alt="Gatito" />
+</p>
+
+<p align="center">
+	Copyright &copy; 2026
+</p>
+
+<p align="center">
+	<a href="LICENSE"><img src="https://img.shields.io/static/v1.svg?style=for-the-badge&label=License&message=MIT&logoColor=d9e0ee&colorA=363a4f&colorB=b7bdf8" alt="Licencia MIT" /></a>
+</p>
