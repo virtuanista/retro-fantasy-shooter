@@ -1,3 +1,5 @@
+<p align="center"><b>Español</b> · <a href="README.en.md">English</a></p>
+
 <div align="center">
 
 # Retro Fantasy Shooter
@@ -196,13 +198,6 @@ El resultado es cero excepciones en consola.
 ## Licencia
 
 Código, arte y música originales, publicados con licencia [MIT](LICENSE).
-
-<details>
-<summary><b>In English</b></summary>
-
-*Retro Fantasy Shooter* is an 8-bit style horizontal shoot'em up for the browser, inspired by Sega's *Fantasy Zone*. All sprites are rasterized from code and the chiptune music is generated from seeds; there are no dependencies at all. [Play it in your browser](https://virtuanista.github.io/retro-fantasy-shooter/) or just open `index.html`.
-
-</details>
 
 <p align="center">
 	Repositorio generado por <a href="https://github.com/virtuanista" target="_blank">virtu 🎣</a>
