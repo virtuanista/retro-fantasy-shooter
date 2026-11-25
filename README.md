@@ -35,6 +35,7 @@ No usa recursos externos: todo se genera en el navegador.
 - [Curiosidades técnicas](#curiosidades-técnicas)
 - [Estructura](#estructura)
 - [Pruebas](#pruebas)
+- [Requisitos de aceptación](#requisitos-de-aceptación)
 - [Licencia](#licencia)
 
 ## Cómo jugar
@@ -95,8 +96,7 @@ El estado está en `window.__game`.
 
 Cada zona tiene sus propios peligros: géiseres de lava o de arena, carámbanos, minas que suben y rayos.
 
-La tienda tiene 16 artículos en 4 categorías, con inflación individual. Los nombres de los
-artículos se agrupan por categoría:
+La tienda tiene 16 artículos en 4 categorías, con inflación individual:
 
 | Artículo |
 |---|

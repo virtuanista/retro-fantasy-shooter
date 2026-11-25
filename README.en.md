@@ -35,6 +35,7 @@ It uses no external assets: everything is generated in the browser.
 - [Technical notes](#technical-notes)
 - [Structure](#structure)
 - [Tests](#tests)
+- [Acceptance requirements](#acceptance-requirements)
 - [License](#license)
 
 ## How to play
@@ -95,8 +96,7 @@ The state is in `window.__game`.
 
 Each zone has its own hazards: lava or sand geysers, icicles, rising mines and lightning bolts.
 
-The shop has 16 items in 4 categories, each with its own inflation. Item names
-are grouped by category:
+The shop has 16 items in 4 categories, each with its own inflation:
 
 | Item |
 |---|
